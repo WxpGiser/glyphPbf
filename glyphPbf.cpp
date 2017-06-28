@@ -40,7 +40,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	_mkdir(outdir.c_str());
 
-	//string fontfile = "D:/sdf-glyph-foundry-master/test/fonts/arial unicode ms.ttf";
+	pos = fontfile.find_last_of('.');
+	sub = fontfile.substr(0, pos);
+	pos = sub.find_last_of('/');
+	string fontName = sub.substr(pos + 1, sub.length());
+
+	//string fontfile = "D:/sdf-glyph-foundry-master/test/fonts/Arial Unicode MS.ttf";
 	GlyphRender render(fontfile);
 
 	vector<uint32_t> fails;
@@ -54,7 +59,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		llmr::glyphs::glyphs *glyphs = new llmr::glyphs::glyphs();
 
 		llmr::glyphs::fontstack *fontstack = glyphs->add_stacks();
-		fontstack->set_name("Arial Unicode MS");
+		fontstack->set_name(fontName);
 		fontstack->set_range(bs);
 
 		for (int k = 0; k < 256; ++k)
